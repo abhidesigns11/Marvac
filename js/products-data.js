@@ -1,0 +1,280 @@
+/* ==========================================================================
+   MARVAC COMPOSITES — Product Catalog Data
+   Single source of truth, rendered into products.html and product.html
+   ========================================================================== */
+
+const CATEGORIES = [
+  { id: "films",      label: "Films & Fabrics" },
+  { id: "mesh",       label: "Mesh & Reinforcement" },
+  { id: "tapes",      label: "Tapes & Adhesives" },
+  { id: "tubing",     label: "Tubing & Hoses" },
+  { id: "fittings",   label: "Fittings & Valves" },
+  { id: "tools",      label: "Application Tools" },
+];
+
+const PRODUCTS = [
+  {
+    slug: "vacuum-bagging-film",
+    name: "Vacuum Bagging Film",
+    category: "films",
+    tagline: "The airtight skin for every infusion layup",
+    image: "images/products/vacuum-bagging-film.jpg",
+    blurb: "Seals the mould surface under vacuum for the infusion process, prized for toughness and very low permeability.",
+    description: "The Vacuum Bagging Film is widely used in advanced composites industries. This film is used to cover and seal the mould surface under vacuum conditions in the process called vacuum infusion. It is trusted across the industry for its excellent physical properties — high temperature resistance, toughness, good flexibility, high elongation and very low permeability.",
+    specs: [
+      { label: "Thickness range", value: "55 / 65 / 75 / 85 micron" },
+      { label: "Key property", value: "Very low permeability" },
+      { label: "Best for", value: "Vacuum infusion & prepreg bagging" },
+    ],
+  },
+  {
+    slug: "peel-ply",
+    name: "Peel Ply",
+    category: "films",
+    tagline: "A clean, bondable surface every time",
+    image: "images/products/peel-ply.jpg",
+    blurb: "Plain-woven nylon fabric with a polyester tracer that leaves a bondable surface once peeled away.",
+    description: "Peel ply is a plain-woven nylon fabric with a polyester tracer thread. It creates a good bondable surface on the fabricated part and is subsequently removed to expose a clean, better surface for bonding the next layer — an essential consumable for secondary bonding and finishing.",
+    specs: [
+      { label: "GSM options", value: "85 / 90 / 100 / 105" },
+      { label: "Material", value: "Woven nylon, polyester tracer" },
+      { label: "Best for", value: "Surface prep before bonding" },
+    ],
+  },
+  {
+    slug: "breather-fabric",
+    name: "Breather Fabric",
+    category: "films",
+    tagline: "Even vacuum, every time, across the whole mould",
+    image: "images/products/breather-fabric.jpg",
+    blurb: "Non-woven polyester felt that draws vacuum evenly across the mould in prepreg and wet-lay bagging.",
+    description: "Breather Fabric is manufactured from non-woven polyester felt and is designed for use as a breather layer in vacuum bagging prepreg laminates, as well as serving as a combined breather and soaker layer in wet-lay vacuum bagging processes. It is engineered for optimal breathability, thermal resistance and resin system compatibility.",
+    specs: [
+      { label: "GSM options", value: "130 / 150 / 250 / 300" },
+      { label: "Material", value: "Non-woven polyester felt" },
+      { label: "Best for", value: "Prepreg & wet-lay bagging" },
+    ],
+  },
+  {
+    slug: "infusion-mesh",
+    name: "Infusion Mesh",
+    category: "mesh",
+    tagline: "Guides resin evenly, then walks away",
+    image: "images/products/infusion-mesh.jpg",
+    blurb: "Rhombic-shaped polymer mesh laid over the mould to spread resin uniformly during infusion.",
+    description: "Infusion Mesh is a rhombic-shaped polymer mesh widely used in the advanced composites industry. It is laid flat over the mould surface to ensure uniform resin distribution during the vacuum infusion process. Engineered to withstand substantial negative pressure, it is generally produced in green for easy visual monitoring of resin flow, and is removed once the resin cures.",
+    specs: [
+      { label: "GSM range", value: "160 – 250" },
+      { label: "Colour", value: "Green, for flow visibility" },
+      { label: "Best for", value: "Uniform resin distribution" },
+    ],
+  },
+  {
+    slug: "knitted-fabric",
+    name: "Knitted Fabric",
+    category: "mesh",
+    tagline: "Resin flow in every direction, evenly calibrated",
+    image: "images/products/knitted-fabric.jpg",
+    blurb: "A polyethylene monofilament net built for uniform, omni-directional resin flow.",
+    description: "Knitted Fabric is a net made from polyethylene monofilament, designed to ensure uniform resin flow in all directions during the vacuum infusion process. Its evenly distributed, calibrated structure allows for consistent resin distribution across the mould surface, aiding in the production of high-quality laminates and composite parts.",
+    specs: [
+      { label: "GSM options", value: "130 / 140 / 155" },
+      { label: "Material", value: "Polyethylene monofilament" },
+      { label: "Best for", value: "Omni-directional resin flow" },
+    ],
+  },
+  {
+    slug: "woven-roving-glass-fabric",
+    name: "Woven Roving Glass Fabric",
+    category: "mesh",
+    tagline: "The workhorse of large-scale composite builds",
+    image: "images/products/woven-roving-glass-fabric.jpg",
+    blurb: "Heavy-weight bidirectional glass reinforcement that builds thickness and strength fast.",
+    description: "Woven Roving is a heavy-weight, high-performance reinforcement fabric used extensively in the composite industry. It is created by interlacing continuous glass fibre rovings — untwisted bundles of glass filaments — into a bidirectional (0°/90°) pattern. Because of its coarse weave and heavy fibre count, it is the workhorse of large-scale composite fabrication, prized for its ability to build thickness and structural strength rapidly.",
+    specs: [
+      { label: "GSM options", value: "200 / 400 / 600" },
+      { label: "Weave", value: "Bidirectional (0°/90°)" },
+      { label: "Best for", value: "Structural hulls & large builds" },
+    ],
+  },
+  {
+    slug: "fiber-glass-mesh",
+    name: "Fiber Glass Mesh",
+    category: "mesh",
+    tagline: "Lightweight reinforcement for thin, flat surfaces",
+    image: "images/products/fiber-glass-mesh.jpg",
+    blurb: "A lightweight, high-tensile scrim for dimensional stability and crack resistance.",
+    description: "Also referred to as Reinforcing Mesh or Fibreglass Scrim, this lightweight, high-tensile material is designed to provide dimensional stability and crack resistance. Unlike the heavy Woven Roving used for structural hulls, this mesh is the go-to for reinforcing flat surfaces, thin laminates, and specialised construction-composite crossovers.",
+    specs: [
+      { label: "GSM range", value: "60 – 145" },
+      { label: "Character", value: "Lightweight, high-tensile" },
+      { label: "Best for", value: "Flat surfaces & thin laminates" },
+    ],
+  },
+  {
+    slug: "sealant-tape",
+    name: "Sealant Tape",
+    category: "tapes",
+    tagline: "The air-tight seal that holds under heat and pressure",
+    image: "images/products/sealant-tape.jpg",
+    blurb: "High-tack yellow/black tape formulated for vacuum bagging in composite and wind blade manufacturing.",
+    description: "Sealant Tape (yellow/black) is developed for vacuum bagging in composite and wind blade manufacturing. It is formulated for high tack, reinforced to resist flow under heat and pressure, and ensures an air-tight seal during curing. It removes cleanly with minimal residue. Common uses include debulking, envelope bagging, resin damming and pressure stripping.",
+    specs: [
+      { label: "Colours", value: "Yellow / Black" },
+      { label: "Property", value: "High tack, heat & pressure resistant" },
+      { label: "Best for", value: "Debulking, envelope bagging, damming" },
+    ],
+  },
+  {
+    slug: "spiral-tube",
+    name: "Spiral Tube",
+    category: "tubing",
+    tagline: "Holds full vacuum without collapsing",
+    image: "images/products/spiral-tube.jpg",
+    blurb: "Spiral-wound nylon or HDPE tube that maintains consistent vacuum evenly across the mould.",
+    description: "Spiral Tube is used during resin infusion in composites product formation. It establishes consistent vacuum throughout the mould, evenly. It maintains vacuum even at full negative pressure, as it is capable of withstanding that pressure without collapsing. It is made from nylon or HDPE as per requirement.",
+    specs: [
+      { label: "Diameter range", value: "8 mm – 20 mm" },
+      { label: "Material", value: "Nylon or HDPE" },
+      { label: "Best for", value: "Maintaining even vacuum across mould" },
+    ],
+  },
+  {
+    slug: "feed-hose",
+    name: "Feed Hose",
+    category: "tubing",
+    tagline: "The resin's route from drum to mould",
+    image: "images/products/feed-hose.jpg",
+    blurb: "Nylon or HDPE hose used as the resin transfer medium in VARTM and infusion processes.",
+    description: "Feed Hose Pipes are used in advanced composites industries where the manufacturing process is VARTM. They serve as a resin transfer medium in the infusion process, made from nylon or HDPE as per requirement.",
+    specs: [
+      { label: "Diameter range", value: "8 mm – 20 mm" },
+      { label: "Material", value: "Nylon or HDPE" },
+      { label: "Best for", value: "Resin transfer in VARTM / infusion" },
+    ],
+  },
+  {
+    slug: "pvc-spring-hose-pipe",
+    name: "PVC Spring Hose Pipe",
+    category: "tubing",
+    tagline: "High strength meets easy visual inspection",
+    image: "images/products/pvc-spring-hose-pipe.jpg",
+    blurb: "Spring-steel reinforced PVC tubing built for high-pressure and vacuum applications.",
+    description: "PVC Spring Hose Pipe is reinforced with embedded spring steel wire within the PVC wall, making it suitable for high-pressure and vacuum applications. The spring steel provides high strength, while the PVC tubing ensures lightweight flexibility. Its clear construction offers excellent transparency, allowing easy visual inspection of fluid flow. Available in a variety of ID and OD.",
+    specs: [
+      { label: "Reinforcement", value: "Embedded spring steel wire" },
+      { label: "Construction", value: "Clear PVC, variety of ID/OD" },
+      { label: "Best for", value: "High-pressure & vacuum lines" },
+    ],
+  },
+  {
+    slug: "braided-hose-pipe",
+    name: "Braided Hose Pipe",
+    category: "tubing",
+    tagline: "Clear walls, high-tenacity braid, easy to trust",
+    image: "images/products/braided-hose-pipe.jpg",
+    blurb: "Non-toxic PVC braided with high-tenacity polyester yarn for resin flow and vacuum suction lines.",
+    description: "Flexible PVC Transparent Braided Hose is reinforced with high-tenacity polyester yarn, offering durability and resistance to high pressure. Made from non-toxic, high-quality PVC, it is commonly used for resin flow and vacuum suction lines in advanced composite processing. Its clear, smooth surface allows easy visual monitoring for blockages and air locks. Available in a variety of ID and OD.",
+    specs: [
+      { label: "Reinforcement", value: "High-tenacity polyester yarn" },
+      { label: "Construction", value: "Clear, non-toxic PVC" },
+      { label: "Best for", value: "Resin flow & vacuum suction lines" },
+    ],
+  },
+  {
+    slug: "resin-inlet-port",
+    name: "Resin Inlet Port",
+    category: "fittings",
+    tagline: "Smooth, controlled entry for resin",
+    image: "images/products/resin-inlet-port.jpg",
+    blurb: "Chemical-resistant plastic port that introduces resin into the laminate during infusion.",
+    description: "Resin Inlet Ports are used to introduce resin into the laminate during vacuum infusion. Made of chemical-resistant plastic, the port connects to the resin feed line and ensures smooth, controlled resin flow into the mould.",
+    specs: [
+      { label: "Material", value: "Chemical-resistant plastic" },
+      { label: "Function", value: "Controlled resin entry point" },
+      { label: "Best for", value: "Vacuum infusion set-ups" },
+    ],
+  },
+  {
+    slug: "tee-connector",
+    name: "Tee Connector",
+    category: "fittings",
+    tagline: "Reliable branching for resin flow lines",
+    image: "images/products/tee-connector.jpg",
+    blurb: "Low-cost, high-strength thermoplastic fitting used to split and distribute resin lines.",
+    description: "The Tee Connector is manufactured from a low-cost, high-strength thermoplastic that provides excellent stiffness, chemical resistance and fatigue resistance. It is commonly used in the resin flow lines of the vacuum infusion process to ensure efficient and reliable distribution.",
+    specs: [
+      { label: "Material", value: "High-strength thermoplastic" },
+      { label: "Properties", value: "Chemical & fatigue resistant" },
+      { label: "Best for", value: "Branching resin flow lines" },
+    ],
+  },
+  {
+    slug: "vacuum-valve",
+    name: "Vacuum Valve",
+    category: "fittings",
+    tagline: "A leak-proof shut-off, built for infusion",
+    image: "",
+    icon: "valve",
+    blurb: "Thermoplastic shut-off valve with O-ring seals on both ends for a secure, leak-proof close.",
+    description: "The Vacuum Valve is made from a low-cost, high-strength thermoplastic, offering excellent stiffness, chemical resistance and fatigue resistance. This shut-off valve, designed specifically for vacuum infusion processes, is engineered to be leak-proof through the use of O-rings on both ends, ensuring a secure and reliable seal.",
+    specs: [
+      { label: "Material", value: "High-strength thermoplastic" },
+      { label: "Sealing", value: "O-rings on both ends" },
+      { label: "Best for", value: "Leak-proof vacuum shut-off" },
+    ],
+  },
+  {
+    slug: "metal-ball-valve",
+    name: "Metal Ball Valve",
+    category: "fittings",
+    tagline: "Corrosion-resistant control for resin lines",
+    image: "images/products/metal-ball-valve.jpg",
+    blurb: "Brass ball valve prized for durability and a tight seal under vacuum.",
+    description: "Brass ball valves are frequently used in vacuum infusion processes for controlling the flow of resin and other materials. They are chosen for their durability, corrosion resistance, and ability to create a tight seal — crucial for maintaining the vacuum required for successful infusion.",
+    specs: [
+      { label: "Material", value: "Brass" },
+      { label: "Properties", value: "Corrosion-resistant, tight seal" },
+      { label: "Best for", value: "Controlling resin/material flow" },
+    ],
+  },
+  {
+    slug: "paint-rollers",
+    name: "Paint Rollers & Trays",
+    category: "tools",
+    tagline: "Smooth application, from gelcoat to topcoat",
+    image: "images/products/paint-rollers.jpg",
+    blurb: "Foam, mohair and velour rollers plus chemically resistant trays for resin and gelcoat application.",
+    description: "In the composites industry, paint rollers are widely used for resin application, air bubble removal, and surface finishing during lamination. We offer foam rollers — ideal for smooth resin application and gelcoat touch-ups, mohair rollers — suitable for fine finishes with minimal texture, and velour rollers — for a high-quality, low-lint finish. Paint trays are used during the application of gelcoats, topcoats or coloured resins, and are chemically resistant for spray or roller use.",
+    specs: [
+      { label: "Roller types", value: "Foam / Mohair / Velour" },
+      { label: "Trays", value: "Chemically resistant" },
+      { label: "Best for", value: "Gelcoat, topcoat & resin application" },
+    ],
+    gallery: ["images/products/foam-roller.jpg", "images/products/mohair-roller.jpg", "images/products/paint-tray.jpg"],
+  },
+  {
+    slug: "other-accessories",
+    name: "Other Accessories",
+    category: "tools",
+    tagline: "The small parts that finish every job properly",
+    image: "images/products/other-accessories.jpg",
+    blurb: "Roller handles, extension rods, axle nets, PTFE tape, masking tape and double-sided adhesive tape.",
+    description: "We offer a full range of supporting accessories to round out every vacuum infusion or lamination job: paint roller handles, extension rods, axle nets, PTFE Teflon tape, masking tape, and double-sided adhesive tape — all sourced to the same quality standard as our core consumables.",
+    specs: [
+      { label: "Includes", value: "Handles, rods, axle net" },
+      { label: "Tapes", value: "PTFE, masking, double-sided" },
+      { label: "Best for", value: "Finishing & general workshop use" },
+    ],
+    gallery: ["images/products/roller-handle.jpg", "images/products/axle-net.jpg", "images/products/ptfe-tape.jpg", "images/products/masking-tape.jpg"],
+  },
+];
+
+function getProductBySlug(slug) {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
+
+function getCategoryLabel(id) {
+  const c = CATEGORIES.find((c) => c.id === id);
+  return c ? c.label : id;
+}
