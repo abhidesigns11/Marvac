@@ -8,11 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---- Mobile nav toggle ---- */
   const toggle = document.querySelector(".nav-toggle");
   if (toggle) {
+    toggle.setAttribute("aria-expanded", "false");
     toggle.addEventListener("click", () => {
-      document.body.classList.toggle("menu-open");
+      const open = document.body.classList.toggle("menu-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
     document.querySelectorAll(".mobile-panel a").forEach((a) => {
-      a.addEventListener("click", () => document.body.classList.remove("menu-open"));
+      a.addEventListener("click", () => {
+        document.body.classList.remove("menu-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
     });
   }
 
@@ -24,16 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", onHeaderScroll, { passive: true });
   }
 
-  /* ---- Back-to-top button ---- */
+  /* ---- Back-to-top + WhatsApp float: reveal once scrolled past the hero,
+     so they never sit on top of the hero content/stats ---- */
   const topBtn = document.getElementById("topBtn");
-  if (topBtn) {
-    window.addEventListener(
-      "scroll",
-      () => topBtn.classList.toggle("show", window.scrollY > 500),
-      { passive: true }
-    );
-    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-  }
+  const waFloat = document.querySelector(".wa-float");
+  const updateFloats = () => {
+    if (topBtn) topBtn.classList.toggle("show", window.scrollY > 500);
+    if (waFloat) waFloat.classList.toggle("show", window.scrollY > 140);
+  };
+  updateFloats();
+  window.addEventListener("scroll", updateFloats, { passive: true });
+  if (topBtn) topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   /* ---- Scroll reveal (+ staggered children) ---- */
   const revealEls = document.querySelectorAll(".reveal");
