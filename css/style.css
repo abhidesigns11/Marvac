@@ -256,16 +256,37 @@ input, textarea{ font-family: inherit; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  transition: background 0.25s ease;
 }
-.nav-toggle svg{ width: 20px; height: 20px; fill: var(--navy-2); }
+.nav-toggle .bar{
+  position: absolute;
+  left: 12px;
+  width: 18px; height: 2px;
+  border-radius: 2px;
+  background: var(--navy-2);
+  transition: transform 0.32s cubic-bezier(.2,.8,.2,1), opacity 0.2s ease, top 0.2s ease;
+}
+.nav-toggle .bar1{ top: 15px; }
+.nav-toggle .bar2{ top: 21px; }
+.nav-toggle .bar3{ top: 27px; }
+body.menu-open .nav-toggle{ background: rgba(15,46,115,0.1); }
+body.menu-open .nav-toggle .bar1{ top: 21px; transform: rotate(45deg); }
+body.menu-open .nav-toggle .bar2{ opacity: 0; transform: scaleX(0); }
+body.menu-open .nav-toggle .bar3{ top: 21px; transform: rotate(-45deg); }
 
 .mobile-panel{
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 10px 20px 20px;
+  padding: 0 20px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   background: rgba(246,249,250,0.98);
-  border-top: 1px solid var(--line);
+  border-top: 0 solid var(--line);
+  transform: translateY(-6px);
+  transition: max-height 0.38s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease, transform 0.32s cubic-bezier(.2,.8,.2,1), padding 0.38s ease;
 }
 .mobile-panel a{
   padding: 13px 6px;
@@ -275,13 +296,23 @@ input, textarea{ font-family: inherit; }
   border-bottom: 1px solid var(--line-soft);
 }
 .mobile-panel a.active{ color: var(--cyan-2); }
-.mobile-panel .btn{ margin-top: 12px; }
+.mobile-panel .btn{ margin-top: 12px; margin-bottom: 16px; }
 
 @media (max-width: 900px){
   .main-nav{ display: none; }
   .nav-actions .btn--ghost{ display: none; }
   .nav-toggle{ display: inline-flex; }
-  body.menu-open .mobile-panel{ display: flex; }
+  body.menu-open .mobile-panel{
+    max-height: 420px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 10px 20px 20px;
+    border-top-width: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .nav-toggle .bar, .mobile-panel{ transition: none !important; }
 }
 
 /* ---------------------------------------------------------------------- */
@@ -375,6 +406,12 @@ input, textarea{ font-family: inherit; }
   overflow: hidden;
   background: var(--grad-deep);
   color: #fff;
+}
+@media (max-width: 720px){
+  .page-hero{ padding: 108px 0 40px; }
+  .page-hero h1{ margin-top: 10px; }
+  .page-hero p{ margin-top: 12px; }
+  .breadcrumb{ margin-top: 16px; }
 }
 .page-hero::before{
   content: "";
@@ -618,26 +655,38 @@ input, textarea{ font-family: inherit; }
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 10px 26px rgba(37,211,102,0.42);
   z-index: 90;
-  transition: transform 0.2s;
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease;
 }
+.wa-float.show{ opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 .wa-float:hover{ transform: scale(1.07); }
 
 .top-btn{
   position: fixed;
-  right: 22px; bottom: 90px;
+  right: 22px; bottom: 96px;
   width: 44px; height: 44px;
   border-radius: 50%;
   background: rgba(15,46,115,0.85);
   color: #fff;
   border: none;
   font-size: 18px;
-  display: none;
+  display: flex;
   align-items: center; justify-content: center;
   box-shadow: var(--shadow-md);
   z-index: 90;
   backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease;
 }
-.top-btn.show{ display: flex; }
+.top-btn.show{ opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce){
+  .wa-float, .top-btn{ transition: opacity 0.2s ease !important; transform: none !important; }
+}
 
 /* ---------------------------------------------------------------------- */
 /* About page                                                              */
@@ -1004,10 +1053,10 @@ input, textarea{ font-family: inherit; }
   background: linear-gradient(180deg, rgba(8,27,71,0) 40%, rgba(8,27,71,0.55) 100%);
 }
 .industry-badge{
-  position: absolute; left: 16px; bottom: -19px;
-  width: 44px; height: 44px; border-radius: 13px;
+  position: absolute; left: 14px; top: 14px;
+  width: 42px; height: 42px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 18px rgba(10,33,89,0.22);
+  box-shadow: 0 6px 16px rgba(8,27,71,0.28);
   z-index: 2;
 }
 .industry-badge svg{ width: 21px; height: 21px; }
@@ -1077,3 +1126,44 @@ input, textarea{ font-family: inherit; }
 .industry-badge{ transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
 .footer-socials a{ transition: background 0.25s ease, transform 0.25s cubic-bezier(.2,.8,.2,1); }
 .footer-socials a:hover{ transform: translateY(-3px); }
+
+/* ==========================================================================
+   Guaranteed on-load entrance motion (not scroll-dependent — the very first
+   thing a visitor sees on every page should visibly move once).
+   ========================================================================== */
+@keyframes riseIn{
+  from{ opacity: 0; transform: translateY(22px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+.hero-content > *, .page-hero > .wrap > *{
+  animation: riseIn 0.7s cubic-bezier(.16,.8,.24,1) both;
+}
+.hero-content .eyebrow{ animation-delay: 0.05s; }
+.hero-content h1{ animation-delay: 0.15s; }
+.hero-content p{ animation-delay: 0.28s; }
+.hero-content .hero-cta{ animation-delay: 0.40s; }
+.page-hero > .wrap > .eyebrow{ animation-delay: 0.05s; }
+.page-hero > .wrap > h1{ animation-delay: 0.15s; }
+.page-hero > .wrap > p{ animation-delay: 0.26s; }
+.page-hero > .wrap > .breadcrumb{ animation-delay: 0.38s; }
+
+/* Hero stats + industry grid sit right at the fold on first load too —
+   fade them in on load rather than waiting on a scroll event that may
+   never fire if the visitor never scrolls. Real repeat-visits still get
+   the scroll-reveal treatment for everything further down the page. */
+.hero-stats.reveal-group .reveal-item{
+  animation: riseIn 0.6s cubic-bezier(.16,.8,.24,1) both;
+  animation-delay: calc(0.5s + var(--stagger, 0) * 70ms);
+  opacity: 1; transform: none; /* let the keyframe own the motion, not the reveal-group base state */
+}
+
+/* ---- Touch feedback: hover-only motion doesn't reach phones, so give
+   cards and buttons a tap response too ---- */
+.card:active{ transform: scale(0.985); }
+.btn:active{ transform: scale(0.95); }
+
+@media (prefers-reduced-motion: reduce){
+  .hero-content > *, .page-hero > .wrap > *, .hero-stats.reveal-group .reveal-item{
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+}
