@@ -8,12 +8,13 @@ function chipButton(cat, count) {
   return `<button class="chip" data-cat="${cat.id}">${cat.label}<span style="opacity:.6; margin-left:6px;">${count}</span></button>`;
 }
 
-function productCardHTML(p) {
+function productCardHTML(p, i) {
   const media = p.image
     ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
     : `<div class="pc-icon">${VALVE_ICON_SVG}</div>`;
+  const delay = (i % 12) * 45;
   return `
-  <a href="product.html?slug=${p.slug}" class="card product-card">
+  <a href="product.html?slug=${p.slug}" class="card product-card reveal-in" style="transition-delay:${delay}ms;">
     <div class="pc-img">
       ${media}
       <span class="pc-tag">${getCategoryLabel(p.category)}</span>
@@ -48,6 +49,11 @@ function render() {
   empty.style.display = list.length ? "none" : "block";
   grid.style.display = list.length ? "grid" : "none";
   countEl.textContent = `${list.length} product${list.length === 1 ? "" : "s"}`;
+
+  // Trigger the fade/rise-in on the next frame so the transition actually plays.
+  requestAnimationFrame(() => {
+    grid.querySelectorAll(".reveal-in").forEach((card) => card.classList.add("in"));
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

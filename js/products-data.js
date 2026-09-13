@@ -214,8 +214,7 @@ const PRODUCTS = [
     name: "Vacuum Valve",
     category: "fittings",
     tagline: "A leak-proof shut-off, built for infusion",
-    image: "",
-    icon: "valve",
+    image: "images/products/metal-ball-valve.jpg",
     blurb: "Thermoplastic shut-off valve with O-ring seals on both ends for a secure, leak-proof close.",
     description: "The Vacuum Valve is made from a low-cost, high-strength thermoplastic, offering excellent stiffness, chemical resistance and fatigue resistance. This shut-off valve, designed specifically for vacuum infusion processes, is engineered to be leak-proof through the use of O-rings on both ends, ensuring a secure and reliable seal.",
     specs: [
